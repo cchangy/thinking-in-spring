@@ -6,7 +6,7 @@
     <!-- 通过导入复用bean -->
     <import resource="dependent-lookup-context.xml"/>
 
-    <bean id="userHolder" class="com.chaytech.spring.ioc.injection.UserHolder" autowire="byName">
+    <bean id="userHolder" class="com.chaytech.spring.ioc.injection.UserHolder" autowire="constructor">
 
     </bean>
 </beans>

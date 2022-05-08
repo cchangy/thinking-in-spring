@@ -6,6 +6,15 @@
     <bean id="user" class="com.chaytech.spring.common.domain.User">
         <property name="name" value="小陈"/>
         <property name="age" value="23"/>
+        <property name="city" value="HANGZHOU"/>
+        <property name="configLocation" value="user-config.properties"/>
+        <property name="workCity" value="HANGZHOU,BEIJING"/>
+        <property name="lifeCitys">
+            <list>
+                <value>BEIJING</value>
+                <value>SHANGHAI</value>
+            </list>
+        </property>
     </bean>
 
     <bean id="vipUser" class="com.chaytech.spring.common.domain.VipUser" parent="user" primary="true">

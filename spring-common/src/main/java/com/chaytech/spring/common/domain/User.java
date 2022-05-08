@@ -1,5 +1,11 @@
 package com.chaytech.spring.common.domain;
 
+import com.chaytech.spring.common.enums.CityEnum;
+import org.springframework.core.io.Resource;
+
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * @author chency
  * @email chaytech@163.com
@@ -9,6 +15,10 @@ public class User {
 
     private String name;
     private Integer age;
+    private CityEnum city;
+    private Resource configLocation;
+    private CityEnum[] workCity;
+    private List<CityEnum> lifeCitys;
 
     public String getName() {
         return name;
@@ -26,11 +36,47 @@ public class User {
         this.age = age;
     }
 
+    public CityEnum getCity() {
+        return city;
+    }
+
+    public void setCity(CityEnum city) {
+        this.city = city;
+    }
+
+    public Resource getConfigLocation() {
+        return configLocation;
+    }
+
+    public void setConfigLocation(Resource configLocation) {
+        this.configLocation = configLocation;
+    }
+
+    public CityEnum[] getWorkCity() {
+        return workCity;
+    }
+
+    public void setWorkCity(CityEnum[] workCity) {
+        this.workCity = workCity;
+    }
+
+    public List<CityEnum> getLifeCitys() {
+        return lifeCitys;
+    }
+
+    public void setLifeCitys(List<CityEnum> lifeCitys) {
+        this.lifeCitys = lifeCitys;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "name='" + name + '\'' +
                 ", age=" + age +
+                ", city=" + city +
+                ", configLocation=" + configLocation +
+                ", workCity=" + Arrays.toString(workCity) +
+                ", lifeCitys=" + lifeCitys +
                 '}';
     }
 

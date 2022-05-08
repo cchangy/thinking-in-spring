@@ -1,6 +1,7 @@
-package com.chaytech.spring.ioc.injection;
+package com.chaytech.spring.ioc.injection.setter;
 
 import com.chaytech.spring.common.domain.User;
+import com.chaytech.spring.ioc.injection.UserHolder;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 
