@@ -1,8 +1,11 @@
 package com.chaytech.spring.common.domain;
 
 import com.chaytech.spring.common.enums.CityEnum;
+import org.springframework.beans.factory.BeanNameAware;
 import org.springframework.core.io.Resource;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +14,7 @@ import java.util.List;
  * @email chaytech@163.com
  * @Date 2022/05/02
  */
-public class User {
+public class User implements BeanNameAware {
 
     private String name;
     private Integer age;
@@ -19,6 +22,8 @@ public class User {
     private Resource configLocation;
     private CityEnum[] workCity;
     private List<CityEnum> lifeCitys;
+
+    private transient String beanName;
 
     public String getName() {
         return name;
@@ -68,6 +73,10 @@ public class User {
         this.lifeCitys = lifeCitys;
     }
 
+    public String getBeanName() {
+        return beanName;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -87,5 +96,18 @@ public class User {
         return user;
     }
 
+    @PostConstruct
+    public void init() {
+        System.out.println("User bean [" + beanName + "] 初始化...");
+    }
 
+    @PreDestroy
+    public void destroy() {
+        System.out.println("User bean [" + beanName + "] 销毁...");
+    }
+
+    @Override
+    public void setBeanName(String beanName) {
+        this.beanName = beanName;
+    }
 }
