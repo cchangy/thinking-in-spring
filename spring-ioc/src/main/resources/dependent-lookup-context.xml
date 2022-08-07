@@ -3,7 +3,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="user" class="com.chaytech.spring.common.domain.User">
+    <bean id="user" class="com.chency.spring.common.domain.User">
         <property name="name" value="小陈"/>
         <property name="age" value="23"/>
         <property name="city" value="HANGZHOU"/>
@@ -17,7 +17,7 @@
         </property>
     </bean>
 
-    <bean id="vipUser" class="com.chaytech.spring.common.domain.VipUser" parent="user" primary="true">
+    <bean id="vipUser" class="com.chency.spring.common.domain.VipUser" parent="user" primary="true">
         <property name="vipFlag" value="vip用户"/>
     </bean>
 

@@ -6,7 +6,7 @@
     <!-- 通过导入复用bean -->
     <import resource="dependent-lookup-context.xml"/>
 
-    <bean id="userRepository" class="com.chaytech.spring.ioc.repository.UserRepository"
+    <bean id="userRepository" class="com.chency.spring.ioc.repository.UserRepository"
           autowire="byType"> <!-- 自动注入 -->
 
         <!-- 手动配置 -->

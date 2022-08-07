@@ -4,14 +4,14 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <!-- 静态方法创建bean -->
-    <bean id="user-by-static-method" class="com.chaytech.spring.common.domain.User"
+    <bean id="user-by-static-method" class="com.chency.spring.common.domain.User"
         factory-method="createUser">
     </bean>
 
     <!-- 实例方法创建bean -->
     <bean id="user-by-instance-method" factory-bean="userFactory" factory-method="createUser"/>
-    <bean id="userFactory" class="com.chaytech.spring.bean.factory.DefaultUserFactory"/>
+    <bean id="userFactory" class="com.chency.spring.bean.factory.DefaultUserFactory"/>
 
     <!-- factory bean实例化bean -->
-    <bean id="user-by-factory-bean" class="com.chaytech.spring.bean.factory.UserFactoryBean"/>
+    <bean id="user-by-factory-bean" class="com.chency.spring.bean.factory.UserFactoryBean"/>
 </beans>

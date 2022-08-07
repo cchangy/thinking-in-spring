@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user" class="com.chency.spring.common.domain.User">
+        <property name="name" value="小陈"/>
+        <property name="age" value="23"/>
+        <property name="city" value="HANGZHOU"/>
+        <property name="configLocation" value="user-config.properties"/>
+        <property name="workCity" value="HANGZHOU,BEIJING"/>
+        <property name="lifeCitys">
+            <list>
+                <value>BEIJING</value>
+                <value>SHANGHAI</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 合并后的GenericBeanDefinition 会变成 RootBeanDefinition -->
+    <bean id="vipUser" class="com.chency.spring.common.domain.VipUser" parent="user" primary="true">
+        <property name="vipFlag" value="vip用户"/>
+    </bean>
+
+    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <property name="targetBeanName" value="user"/>
+    </bean>
+</beans>
