@@ -13,10 +13,14 @@
         <module>spring-common</module>
         <module>spring-ioc</module>
         <module>spring-bean</module>
+        <module>spring-aop</module>
     </modules>
 
     <properties>
         <spring.version>5.2.2.RELEASE</spring.version>
+        <logback.version>1.2.11</logback.version>
+        <lombok.version>1.18.22</lombok.version>
+        <aspectjrt.version>1.9.6</aspectjrt.version>
     </properties>
 
     <!-- 依赖管理 -->
@@ -50,6 +54,30 @@
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-core</artifactId>
                 <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!-- aspectj -->
+            <dependency>
+                <groupId>org.aspectj</groupId>
+                <artifactId>aspectjrt</artifactId>
+                <version>${aspectjrt.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-classic</artifactId>
+                <version>${logback.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
             </dependency>
         </dependencies>
 
