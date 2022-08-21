@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <!-- 基于xml配置Pointcut -->
+    <bean id="aspectXmlConfig" class="com.chency.spring.aop.aspectj.aspect.AspectXmlConfig"/>
+    <aop:config>
+        <aop:aspect id="aspectConfig" ref="aspectXmlConfig">
+            <aop:pointcut id="anyPublicMethod" expression="execution(public * echo(..))"/>
+            <aop:around method="aroundAnyPublicMethod" pointcut-ref="anyPublicMethod"/>
+            <aop:before method="beforeAnyPublicMethod" pointcut-ref="anyPublicMethod"/>
+            <aop:after method="afterAnyPublicMethod" pointcut-ref="anyPublicMethod"/>
+            <aop:after-returning method="afterReturningAnyPublicMethod" pointcut-ref="anyPublicMethod"/>
+            <aop:after-throwing method="afterThrowingAnyPublicMethod" pointcut-ref="anyPublicMethod"/>
+        </aop:aspect>
+    </aop:config>
+
+
+
+    <bean id="echoService" class="com.chency.spring.aop.proxy.DefaultEchoService"/>
+
+    <bean id="echoServiceMethodInterceptor" class="com.chency.spring.aop.aspectj.interceptor.EchoServiceMethodInterceptor"/>
+
+    <bean id="echoServiceProxyFactoryBean" class="org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="targetName" value="echoService"/>
+        <property name="interceptorNames">
+            <value>echoServiceMethodInterceptor</value>
+        </property>
+    </bean>
+</beans>
