@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Lazy;
  * bean初始化示例
  * <p>
  * 初始化顺序：@PostConstruct -> InitializingBean.afterPropertiesSet() -> initMethod
- * 销售顺序：@PreDestroy -> DisposableBean.destroy() -> destroyMethod
+ * 销毁顺序：@PreDestroy -> DisposableBean.destroy() -> destroyMethod
  * @author chency
  * @date 2022/05/02 20:51
  */

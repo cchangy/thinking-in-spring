@@ -2,6 +2,7 @@ package com.chency.spring.bean.factory;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.SmartInitializingSingleton;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -12,7 +13,7 @@ import javax.annotation.PreDestroy;
  * @author chency
  * @date 2022/05/02
  */
-public class DefaultUserFactory implements UserFactory, InitializingBean, DisposableBean {
+public class DefaultUserFactory implements UserFactory, InitializingBean, DisposableBean, SmartInitializingSingleton {
 
     // 1. 基于@PostConstruct注解的初始化
     @PostConstruct
@@ -51,5 +52,10 @@ public class DefaultUserFactory implements UserFactory, InitializingBean, Dispos
     @Override
     protected void finalize() throws Throwable {
         System.out.println("DefaultUserFactory正在被回收...");
+    }
+
+    @Override
+    public void afterSingletonsInstantiated() {
+        System.out.println("afterSingletonsInstantiated()...");
     }
 }

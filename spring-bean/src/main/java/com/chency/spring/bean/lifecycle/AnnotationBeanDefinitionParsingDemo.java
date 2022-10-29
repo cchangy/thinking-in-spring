@@ -19,7 +19,7 @@ public class AnnotationBeanDefinitionParsingDemo {
         AnnotatedBeanDefinitionReader beanDefinitionReader = new AnnotatedBeanDefinitionReader(beanFactory);
         int beanDefinitionCountBefore = beanFactory.getBeanDefinitionCount();
 
-        // 注册当前类（非@omponent）
+        // 注册当前类（非@Component）
         beanDefinitionReader.register(AnnotationBeanDefinitionDemo.class);
         int beanDefinitionCountAfter = beanFactory.getBeanDefinitionCount();
 

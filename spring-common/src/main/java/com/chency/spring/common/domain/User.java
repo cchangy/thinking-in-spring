@@ -1,7 +1,13 @@
 package com.chency.spring.common.domain;
 
 import com.chency.spring.common.enums.CityEnum;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanClassLoaderAware;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.core.env.Environment;
 import org.springframework.core.io.Resource;
 
 import javax.annotation.PostConstruct;
@@ -10,10 +16,18 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * 执行顺序：AbstractAutowireCapableBeanFactory#invokeAwareMethods
+ *  BeanNameAware
+ *  BeanClassLoaderAware
+ *  BeanFactoryAware
+ *
+ * applicationAware: ApplicationContextAwareProcessor#invokeAwareInterfaces
+ *  EnvironmentAware
+ *
  * @author chency
  * @Date 2022/05/02
  */
-public class User implements BeanNameAware {
+public class User implements BeanNameAware, BeanClassLoaderAware, BeanFactoryAware, EnvironmentAware {
 
     private String name;
     private Integer age;
@@ -21,8 +35,6 @@ public class User implements BeanNameAware {
     private Resource configLocation;
     private CityEnum[] workCity;
     private List<CityEnum> lifeCitys;
-
-    private transient String beanName;
 
     public String getName() {
         return name;
@@ -85,6 +97,9 @@ public class User implements BeanNameAware {
                 ", configLocation=" + configLocation +
                 ", workCity=" + Arrays.toString(workCity) +
                 ", lifeCitys=" + lifeCitys +
+                ", beanName='" + beanName + '\'' +
+                ", classLoader=" + classLoader +
+                ", beanFactory=" + beanFactory +
                 '}';
     }
 
@@ -105,8 +120,28 @@ public class User implements BeanNameAware {
         System.out.println("User bean [" + beanName + "] 销毁...");
     }
 
+    private String beanName;
+    private ClassLoader classLoader;
+    private BeanFactory beanFactory;
+    private Environment environment;
+
     @Override
     public void setBeanName(String beanName) {
         this.beanName = beanName;
+    }
+
+    @Override
+    public void setBeanClassLoader(ClassLoader classLoader) {
+        this.classLoader = classLoader;
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 }

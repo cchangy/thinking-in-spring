@@ -2,23 +2,25 @@ package com.chency.spring.bean.lifecycle;
 
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
- * beanDefinition合并示例
+ * bean初始化生命周期示例
  *
  * @author chency
- * @date 2022/07/31 10:22
+ * @date 2022/07/31 16:41
  */
-public class MergedBeanDefinitionDemo {
+public class BeanInitializationLifecycleDemo {
 
     public static void main(String[] args) {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
-        XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
+        // 方法一：手动注册MyInitializationAwareBeanPostProcessor
+         beanFactory.addBeanPostProcessor(new MyInitializationAwareBeanPostProcessor());
 
+        XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
         int beanNum = beanDefinitionReader.loadBeanDefinitions("dependent-lookup-context.xml");
         System.out.println("加载的BeanDefinition数量：" + beanNum);
 
-        System.out.println("user: " + beanFactory.getBean("user"));
-        System.out.println("superUser: " + beanFactory.getBean("vipUser"));
+        System.out.println(beanFactory.getBean("user"));
     }
 }

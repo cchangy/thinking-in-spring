@@ -16,7 +16,7 @@ public class BeanMetadataConfigurationDemo {
 
     public static void main(String[] args) {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
-        // 实例化BeanDefinitionReader
+        // 基于properties资源的BeanDefinitionReader
         PropertiesBeanDefinitionReader beanDefinitionReader = new PropertiesBeanDefinitionReader(beanFactory);
 
         // 指定字符编码UTF-8

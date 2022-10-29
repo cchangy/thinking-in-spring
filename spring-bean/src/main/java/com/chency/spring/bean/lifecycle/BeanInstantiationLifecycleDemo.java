@@ -1,11 +1,8 @@
 package com.chency.spring.bean.lifecycle;
 
-import com.chency.spring.common.domain.VipUser;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.util.ObjectUtils;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * bean实例化生命周期示例
@@ -16,8 +13,16 @@ import org.springframework.util.ObjectUtils;
 public class BeanInstantiationLifecycleDemo {
 
     public static void main(String[] args) {
+//        executeBeanFactory();
+        System.out.println("---------------------------");
+        executeApplicationContext();
+    }
+
+    private static void executeBeanFactory () {
         DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
-        beanFactory.addBeanPostProcessor(new MyInstantiationAwareBeanPostProcessor());
+        // 方法一：手动注册MyInstantiationAwareBeanPostProcessor
+        // beanFactory.addBeanPostProcessor(new MyInstantiationAwareBeanPostProcessor());
+        // 方法二：将MyInstantiationAwareBeanPostProcessor作为bean注册
 
         XmlBeanDefinitionReader beanDefinitionReader = new XmlBeanDefinitionReader(beanFactory);
         int beanNum = beanDefinitionReader.loadBeanDefinitions("dependent-lookup-context.xml");
@@ -27,15 +32,14 @@ public class BeanInstantiationLifecycleDemo {
         System.out.println(beanFactory.getBean("vipUser"));
     }
 
+    private static void executeApplicationContext() {
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("dependent-lookup-context.xml");
+        // 刷新应用上下文
+        applicationContext.refresh();
 
-    static class MyInstantiationAwareBeanPostProcessor implements InstantiationAwareBeanPostProcessor {
-        @Override
-        public Object postProcessBeforeInstantiation(Class<?> beanClass, String beanName) throws BeansException {
-            if (ObjectUtils.nullSafeEquals("vipUser", beanName) && VipUser.class.equals(beanClass)) {
-                return new VipUser();
-            }
-
-            return null;
-        }
+        System.out.println(applicationContext.getBean("user"));
+        System.out.println(applicationContext.getBean("vipUser"));
+        // 关闭应用上下文
+        applicationContext.close();
     }
 }
