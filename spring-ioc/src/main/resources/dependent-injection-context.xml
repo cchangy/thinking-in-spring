@@ -10,11 +10,11 @@
           autowire="byType"> <!-- 自动注入 -->
 
         <!-- 手动配置 -->
-        <!--<property name="users">
+        <property name="users">
             <util:list>
                 <ref bean="user"/>
                 <ref bean="vipUser"/>
             </util:list>
-        </property>-->
+        </property>
     </bean>
 </beans>
