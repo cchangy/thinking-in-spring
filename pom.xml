@@ -15,6 +15,7 @@
         <module>spring-bean</module>
         <module>spring-aop</module>
         <module>spring-resource</module>
+        <module>spring-i18n</module>
     </modules>
 
     <properties>
@@ -25,11 +26,22 @@
         <spring-aspects.version>4.3.29.RELEASE</spring-aspects.version>
         <snakeyaml.version>1.33</snakeyaml.version>
         <commons-io.version>2.7</commons-io.version>
+        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
+        <junit.version>4.13</junit.version>
     </properties>
 
     <!-- 依赖管理 -->
     <dependencyManagement>
         <dependencies>
+            <!-- spring boot dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-context</artifactId>
@@ -100,6 +112,13 @@
                 <groupId>org.yaml</groupId>
                 <artifactId>snakeyaml</artifactId>
                 <version>${snakeyaml.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
             </dependency>
         </dependencies>
 
