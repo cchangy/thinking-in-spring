@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.chaytech.spring.common</groupId>
+    <groupId>com.chency.spring.common</groupId>
     <artifactId>spring-common</artifactId>
 
     <properties>

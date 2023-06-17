@@ -20,7 +20,7 @@
     <dependencies>
         <!-- 公共依赖 -->
         <dependency>
-            <groupId>com.chaytech.spring.common</groupId>
+            <groupId>com.chency.spring.common</groupId>
             <artifactId>spring-common</artifactId>
             <version>${version}</version>
         </dependency>
