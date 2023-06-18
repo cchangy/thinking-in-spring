@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.chency.spring.common</groupId>
             <artifactId>spring-common</artifactId>
-            <version>${version}</version>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>

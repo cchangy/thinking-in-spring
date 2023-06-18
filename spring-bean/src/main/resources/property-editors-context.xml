@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        https://www.springframework.org/schema/util/spring-util.xsd">
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars">
+            <list>
+                <bean class="com.chency.spring.bean.data.conversion.CustomizedPropertyEditorRegistrar"/>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="propertiesToStringConverter" class="com.chency.spring.bean.data.conversion.PropertiesToStringConverter"/>
+
+    <!-- 声明ConversionServiceFactoryBean 并且名称必须为conversionService -->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters" ref="propertiesToStringConverter"/>
+    </bean>
+
+    <util:properties id="propertiesText">
+        <prop key="name">chency</prop>
+    </util:properties>
+
+    <bean id="user" class="com.chency.spring.common.domain.User">
+        <property name="name" value="小陈"/>
+        <property name="age" value="23"/>
+        <property name="properties" value="name=chency"/>
+        <property name="propertiesText" ref="propertiesText"/>
+    </bean>
+</beans>
