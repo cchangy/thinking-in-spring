@@ -18,6 +18,7 @@
         <module>spring-i18n</module>
         <module>spring-validation</module>
         <module>spring-event</module>
+        <module>spring-annotation</module>
     </modules>
 
     <properties>
