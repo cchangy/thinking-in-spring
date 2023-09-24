@@ -3,7 +3,7 @@ package com.chency.spring.aop.proxy;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * echo静态代理类
+ * {@link EchoService} 静态代理类
  *
  * @author chency
  * @date 2022/08/20 16:22

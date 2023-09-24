@@ -13,6 +13,6 @@ public class JdkStaticProxyDemo {
 
     public static void main(String[] args) {
         EchoService echoService = new ProxyEchoService(new DefaultEchoService());
-        log.info(echoService.echo("static proxy"));
+        log.info(echoService.echo("jdk static proxy"));
     }
 }

@@ -8,6 +8,8 @@ import java.lang.reflect.Method;
 import java.util.Objects;
 
 /**
+ * 代码实现 pointcut 示例
+ *
  * @author chency
  * @date 2022/08/21 09:55
  */

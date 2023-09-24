@@ -1,5 +1,6 @@
 package com.chency.spring.aop.aspectj;
 
+import com.chency.spring.aop.proxy.EchoService;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.context.ApplicationContext;
@@ -22,6 +23,8 @@ public class AspectJXmlDemo {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring-aop-context.xml");
 
+        EchoService echoService = context.getBean("echoServiceProxyFactoryBean", EchoService.class);
+        echoService.echo("proxy factory bean");
         context.close();
     }
 }

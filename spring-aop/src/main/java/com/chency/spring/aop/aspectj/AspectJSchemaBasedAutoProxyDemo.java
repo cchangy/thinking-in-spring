@@ -1,4 +1,4 @@
-package com.chency.spring.aop;
+package com.chency.spring.aop.aspectj;
 
 import com.chency.spring.aop.proxy.EchoService;
 import lombok.extern.slf4j.Slf4j;

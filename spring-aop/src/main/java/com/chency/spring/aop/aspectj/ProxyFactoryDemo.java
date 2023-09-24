@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.ProxyFactory;
 
 /**
+ * proxy factory
+ *
  * @author chency
  * @date 2022/08/21 09:12
  */

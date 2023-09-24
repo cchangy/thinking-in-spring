@@ -25,19 +25,20 @@ public class AopInterceptorDemo {
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                 // 判断是否是EchoService以及它的子类
                 if (EchoService.class.isAssignableFrom(method.getDeclaringClass())) {
-                    // 前置拦截器
-                    BeforeInterceptor beforeInterceptor = new BeforeInterceptor() {
-                        @Override
-                        public Object before(Object proxy, Method method, Object[] args) {
-                            return System.currentTimeMillis();
-                        }
-                    };
-
                     Long startTime = 0L;
                     Long endTime = 0L;
                     Object result = null;
                     try {
+                        // 前置拦截器
+                        BeforeInterceptor beforeInterceptor = new BeforeInterceptor() {
+                            @Override
+                            public Object before(Object proxy, Method method, Object[] args) {
+                                log.info("before interceptor...");
+                                return System.currentTimeMillis();
+                            }
+                        };
                         startTime = (long) beforeInterceptor.before(proxy, method, args);
+
                         // 调用目标方法
                         ProxyEchoService echoService = new ProxyEchoService(new DefaultEchoService());
                         result = echoService.echo((String) args[0]);
@@ -46,6 +47,7 @@ public class AopInterceptorDemo {
                         AfterInterceptor afterInterceptor = new AfterInterceptor() {
                             @Override
                             public Object after(Object proxy, Method method, Object[] args, Object result) {
+                                log.info("after interceptor...");
                                 return System.currentTimeMillis();
                             }
                         };
@@ -55,15 +57,18 @@ public class AopInterceptorDemo {
                         ExceptionInterceptor exceptionInterceptor = new ExceptionInterceptor() {
                             @Override
                             public void intercept(Object proxy, Method method, Object[] args, Throwable throwable) {
+                                log.error("exception interceptor...");
                             }
                         };
                         exceptionInterceptor.intercept(proxy, method, args, e);
                     } finally {
                         Long finalEndTime = endTime;
                         Long finalStartTime = startTime;
+                        // finally 拦截
                         FinallyInterceptor finallyInterceptor = new FinallyInterceptor() {
                             @Override
                             public Object finalize(Object proxy, Method method, Object[] args, Object result) {
+                                log.info("finally interceptor...");
                                 return finalEndTime - finalStartTime;
                             }
                         };

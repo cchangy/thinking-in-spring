@@ -3,7 +3,7 @@ package com.chency.spring.aop.proxy;
 import java.util.Random;
 
 /**
- * echo默认实现
+ * {@link EchoService} 默认实现
  *
  * @author chency
  * @date 2022/08/20 16:21
@@ -15,6 +15,6 @@ public class DefaultEchoService implements EchoService {
         if (new Random().nextBoolean()) {
             throw new RuntimeException("throw exception");
         }
-        return "[echo]" + message;
+        return "[echo] " + message;
     }
 }

@@ -5,6 +5,7 @@ import com.chency.spring.aop.proxy.DefaultEchoService;
 import com.chency.spring.aop.proxy.EchoService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.ProxyFactory;
+import org.springframework.aop.support.ComposablePointcut;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 
 /**
@@ -17,7 +18,12 @@ import org.springframework.aop.support.DefaultPointcutAdvisor;
 public class PointcutApiDemo {
 
     public static void main(String[] args) {
-        EchoServicePointcut pointcut = new EchoServicePointcut("echo", EchoService.class);
+        EchoServicePointcut echoServicePointcut = new EchoServicePointcut("echo", EchoService.class);
+
+        // 组合实现
+        ComposablePointcut pointcut = new ComposablePointcut(EchoServiceEchoMethodPointcut.getInstance());
+        pointcut.intersection(echoServicePointcut.getClassFilter());
+        pointcut.intersection(echoServicePointcut.getMethodMatcher());
 
         // 将Pointcut适配成advisor
         DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, new EchoServiceMethodInterceptor());
